@@ -1,14 +1,13 @@
 import random
 opponent_color = 1
-my_color = 0
+# my_color = 0 ##musim to smazat, aby se to pak nastavilo na potrebne cislo?
 board_size = 8
 class MyPlayer:
-    '''Hrac hraje prvni tah'''
+    '''Hrac hraje prvni mozny tah'''
 
     def __init__(self, my_color,opponent_color):
         self.my_color = my_color
         self.opponent_color = opponent_color
-        # self.number_of_iterations = number_of_iterations
         # self.history =  []
         # self.cur_iteration = 0
         # self.my_points = 0 
@@ -17,8 +16,8 @@ class MyPlayer:
 
     def select_move (self, board):
         self.valid_move(board)
-        # print(f"from select_move {r=} and {c=}")
-        print(self.valid_move)
+        # print("to jest select_move")
+        # print(self.valid_move(board)) vrati jako slozku (1, 2)
         return (r, c)
 
 
@@ -33,11 +32,11 @@ class MyPlayer:
             count +=1
         
         if self.not_in_danger(r,c):
-            if data[r][c] == my_color:
+            if data[r][c] == my_color:  
                 return True
         return False
 
-        #pridat podminku,kdyz je konec check if in danger or color = -1  
+        #pridat podminku,kdyz je konec: check if in danger or color = -1  
         
     def valid_move(self,data):
         for r in range (8):
@@ -46,12 +45,14 @@ class MyPlayer:
                     directions = [(0,1),(1,0),(-1,0),(0,-1),(1,1),(-1,-1),(-1,1),(1,-1)]
                     for dx in directions:
                         if self.valid_in_dir(r,c,data, dx[0],dx[1]):
-                            print(f"{r=},{c=}")
-                            break
-                    return r,c # returns the first found -1
+                            #print(f"{r=},{c=}")
+                            return r,c # returns the first found -1
 
+                    
+
+    '''Checks if r or c is out of board size'''
     def not_in_danger(self,r,c):
-        if( r >= 0 and r < board_size and c > 0 and c < board_size):
+        if( r >= 0 and r < board_size and c >= 0 and c < board_size):
             return True
         return False                        
 
